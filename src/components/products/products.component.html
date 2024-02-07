@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="search">
+    <form [formGroup]="form">
+      <input type="text" placeholder="Search..." formControlName="search" />
+    </form>
+
+    <button class="primary" (click)="onAdd()">Agregar</button>
+  </div>
+
+  <div *ngIf="isLoading$ | async; else table">Cargango ...</div>
+
+  <ng-template #table>
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Logo</th>
+            <th>Nombre del Producto</th>
+            <th>Descripción</th>
+            <th>Fecha de liberación</th>
+            <th>Fecha de reestructuración</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody *ngIf="products$ | async">
+          <tr *ngFor="let product of products$ | async">
+            <td>
+              <img src="{{ product.logo }}" alt="" />
+            </td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.date_release | date : "dd/MM/YYYY" }}</td>
+            <td>{{ product.date_revision | date : "dd/MM/YYYY" }}</td>
+            <td>
+              <button class="default" (click)="onEdit(product.id)">
+                Editar
+              </button>
+              <button
+                class="default"
+                (click)="onDelete(product.id, product.name)"
+              >
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="pagination">
+        <span>{{ (products$ | async)?.length }} Resultados</span>
+
+        <select name="rows" id="rows">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+        </select>
+      </div>
+    </div>
+  </ng-template>
+</div>
+
+<div #myModal class="modal">
+  <div class="modal-content">
+    <div class="message">
+      <span>¿Estas seguro de eliminar el producto {{ productName }} ?</span>
+    </div>
+    <div class="actions">
+      <button class="cancel" (click)="onCancel()">Cancelar</button>
+      <button class="confirm" (click)="onConfirm()">Confirmar</button>
+    </div>
+  </div>
+</div>
