@@ -1,0 +1,164 @@
+<div class="container">
+  <button class="primary" (click)="onBack()">Regresar</button>
+
+  <div class="form">
+    <div>
+      <h1>Formulario de Registro</h1>
+    </div>
+
+    <form [formGroup]="form">
+      <div>
+        <label for="">ID</label>
+        <input
+          [class.valid]="
+            form.get('id')?.valid &&
+            (form.get('id')?.dirty || form.get('id')?.touched)
+          "
+          [class.invalid]="
+            form.get('id')?.invalid &&
+            (form.get('id')?.dirty || form.get('id')?.touched)
+          "
+          type="text"
+          formControlName="id"
+        />
+        <span
+          *ngIf="form.controls.id.touched && form.controls.id.errors?.['required']"
+          >ID es requerido</span
+        >
+        <span *ngIf="form.controls.id.errors?.['minlength']"
+          >La cantinidad min para este campo es de 3 caracteres.</span
+        >
+        <span *ngIf="form.controls.id.errors?.['maxlength']"
+          >La cantidad max para este campo es de 10 caracteres.</span
+        >
+
+        <label for="">Descripción</label>
+        <input
+          [class.valid]="
+            form.get('description')?.valid &&
+            (form.get('description')?.dirty || form.get('description')?.touched)
+          "
+          [class.invalid]="
+            form.get('description')?.invalid &&
+            (form.get('description')?.dirty || form.get('description')?.touched)
+          "
+          type="text"
+          formControlName="description"
+        />
+        <span
+          *ngIf="form.controls.description.touched && form.controls.description.errors?.['required']"
+          >Descripción es requerido</span
+        >
+        <span *ngIf="form.controls.description.errors?.['minlength']"
+          >La cantinidad min para este campo es de 10 caracteres.</span
+        >
+        <span *ngIf="form.controls.description.errors?.['maxlength']"
+          >La cantidad max para este campo es de 200 caracteres.</span
+        >
+
+        <label for="">Fecha Liberación</label>
+        <input
+          [class.valid]="
+            form.get('date_release')?.valid &&
+            (form.get('date_release')?.dirty ||
+              form.get('date_release')?.touched)
+          "
+          [class.invalid]="
+            form.get('date_release')?.invalid &&
+            (form.get('date_release')?.dirty ||
+              form.get('date_release')?.touched)
+          "
+          type="text"
+          formControlName="date_release"
+        />
+        <span
+          *ngIf="form.controls.date_release.touched && form.controls.date_release.errors?.['required']"
+          >Fecha Liberación es requerido</span
+        >
+      </div>
+      <div>
+        <label for="">Nombre</label>
+        <input
+          [class.valid]="
+            form.get('name')?.valid &&
+            (form.get('name')?.dirty || form.get('name')?.touched)
+          "
+          [class.invalid]="
+            form.get('name')?.invalid &&
+            (form.get('name')?.dirty || form.get('name')?.touched)
+          "
+          type="text"
+          formControlName="name"
+        />
+        <span
+          *ngIf="form.controls.name.touched && form.controls.name.errors?.['required']"
+          >Nombre es requerido</span
+        >
+        <span *ngIf="form.controls.name.errors?.['minlength']"
+          >La cantinidad min para este campo es de 5 caracteres.</span
+        >
+        <span *ngIf="form.controls.name.errors?.['maxlength']"
+          >La cantidad max para este campo es de 100 caracteres.</span
+        >
+
+        <label for="">Logo</label>
+        <input
+          [class.valid]="
+            form.get('logo')?.valid &&
+            (form.get('logo')?.dirty || form.get('logo')?.touched)
+          "
+          [class.invalid]="
+            form.get('logo')?.invalid &&
+            (form.get('logo')?.dirty || form.get('logo')?.touched)
+          "
+          type="text"
+          formControlName="logo"
+        />
+        <span
+          *ngIf="form.controls.logo.touched && form.controls.logo.errors?.['required']"
+          >Logo es requerido</span
+        >
+
+        <label for="">Fecha Revisión</label>
+        <input
+          [class.valid]="
+            form.get('date_revision')?.valid &&
+            (form.get('date_revision')?.dirty ||
+              form.get('date_revision')?.touched)
+          "
+          [class.invalid]="
+            form.get('date_revision')?.invalid &&
+            (form.get('date_revision')?.dirty ||
+              form.get('date_revision')?.touched)
+          "
+          type="text"
+          formControlName="date_revision"
+        />
+        <span
+          *ngIf="form.controls.date_revision.touched && form.controls.date_revision.errors?.['required']"
+          >Fecha Revision es requerido</span
+        >
+      </div>
+    </form>
+
+    <div class="buttons">
+      <button class="default" (click)="onRestart()">Reiniciar</button>
+      <button
+        *ngIf="id === 0"
+        class="primary"
+        [disabled]="form.invalid"
+        (click)="onSend()"
+      >
+        Enviar
+      </button>
+      <button
+        *ngIf="id > 0"
+        class="primary"
+        [disabled]="form.invalid"
+        (click)="onUpdate()"
+      >
+        Actualizar
+      </button>
+    </div>
+  </div>
+</div>
