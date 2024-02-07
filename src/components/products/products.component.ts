@@ -3,18 +3,16 @@ import {
   ElementRef,
   OnInit,
   Renderer2,
-  TemplateRef,
   ViewChild,
-  ViewChildren,
 } from '@angular/core';
-import * as productsActions from '../../store/products.actions';
-import * as productsSelectors from '../../store/products.selectors';
-import { Store } from '@ngrx/store';
-import { ProductState } from 'src/store/products.reducer';
-import { Observable } from 'rxjs';
-import { Product } from 'src/models/product.model';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { Product } from 'src/models/product.model';
+import { ProductState } from 'src/store/products.reducer';
+import * as productsActions from '../../store/products.actions';
+import * as productsSelectors from '../../store/products.selectors';
 
 @Component({
   selector: 'products',
